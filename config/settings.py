@@ -78,11 +78,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('NAME'),
-        'USER': config('USER'),
+        'USER': config('DBUSER'),
         'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
         'PORT': config('PORT'),
     }
+}
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
 }
 
 
