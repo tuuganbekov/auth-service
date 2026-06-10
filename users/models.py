@@ -21,6 +21,12 @@ class CustomManager(UserManager):
         extra_fields.setdefault("is_active", True)
 
         return self.create_user(phone, password, **extra_fields)
+
+
+class UserRole(models.TextChoices):
+    ADMIN = ("admin", "Admin")
+    MANAGER = ("manager", "Manager")
+    CUSTOMER = ("customer", "Customer")
     
 
 class User(AbstractUser):
@@ -32,6 +38,11 @@ class User(AbstractUser):
     age = models.PositiveIntegerField(
         null=True,
         blank=True,
+    )
+    role = models.CharField(
+        max_length=20,
+        choices=UserRole.choices,
+        default=UserRole.CUSTOMER,
     )
 
     USERNAME_FIELD = "phone"
